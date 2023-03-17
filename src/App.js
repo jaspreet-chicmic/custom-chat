@@ -1,23 +1,25 @@
+import "react-chat-elements/dist/main.css"
+import { MessageBox,ChatItem } from "react-chat-elements"
 import logo from './logo.svg';
 import './App.css';
-
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MessageBox
+        position={"left"}
+        type={"text"}
+        title={"Message Box Title"}
+        text="Here is a text type message box"
+      />
+      
+      <ChatItem
+        avatar={'https://facebook.github.io/react/img/logo.svg'}
+        alt={'Reactjs'}
+        title={'Facebook'}
+        subtitle={'What are you doing?'}
+        date={new Date()}
+        unread={0}
+      />
     </div>
   );
 }
