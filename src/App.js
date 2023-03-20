@@ -1,23 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import Config from './Components/Config';
+import ChatSideBar from './Components/ChatSideBar';
+import Navbar from './Components/NavbarChat';
+import { createContext, useState } from 'react';
+import CurrentChat from './Components/CurrentChat';
+export const ContextObj = createContext();
+//props:
 
 function App() {
+  let [displayChats,setDisplayChats] = useState(Config.ChatSideBar.dataSource);
   return (
+    // displayChats = Config.ChatSideBar.dataSource}
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ContextObj.Provider value={{displayChats, setDisplayChats}}>
+        <ChatSideBar/>
+        <CurrentChat/>
+      </ContextObj.Provider>
     </div>
   );
 }
