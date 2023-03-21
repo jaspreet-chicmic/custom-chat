@@ -8,7 +8,6 @@ function Search() {
   const [searchedTerm,setSearchedTerm] = useState("");
   const [searchResults,setSearchResults] = useState(displayChats);
   const [originalChats,setOriginalChats] = useState(Config.ChatSideBar.dataSource);
-
   function handleSearch(event){
     setSearchedTerm(event.target.value)
     console.log(event.target.value)
@@ -19,19 +18,17 @@ function Search() {
 useEffect(() => {
   let id = setTimeout(() => {
     //searched records
-    let filteredArr = originalChats?.filter((originalChats) => {
-      let arrOfVals = Object.values(originalChats)?.map((val) =>
-        val.toString().toLowerCase()
-      );
+    let filteredArr = originalChats?.filter((originalChat) => {
+      let lowerCaseTitle = originalChat.title.toLowerCase() ;
       let lowerCaseSearch = searchedTerm.toLowerCase();
-      return arrOfVals?.some((val) => val.includes(lowerCaseSearch));
+      return lowerCaseTitle.includes(lowerCaseSearch)
     });
     console.log(filteredArr);
     // setLoading(false);
     setSearchResults(filteredArr);
     // setDisplayChats(filteredArr);
   }, 500);
-  console.log(searchResults);
+  // console.log(searchResults);
 
   return () => {
     // setLoading(true);
@@ -46,34 +43,6 @@ useEffect(() => {
   else setDisplayChats(searchResults);
 }, [searchResults]);
 
-  // useEffect(()=>{
-  //   setDisplayChats(Config.ChatSideBar.dataSource)
-
-  // },[displayChats])
-
-  // useEffect(()=>{
-  //   let id = setTimeout(()=>{
-  //     let filteredArray = [],tempDisplayChats = displayChats;
-  //     filteredArray = tempDisplayChats?.filter(obj => {
-  //       let lower = (obj.title).toLowerCase()
-  //       let lowerSearch = searchedTerm.toLowerCase();
-  //       console.log("in timeout ",tempDisplayChats,lowerSearch)
-  //       return (lower?.includes(lowerSearch))
-  //     });
-  //     // setLoading(false);
-  //     // console.log(filteredArray.at(-1));
-  //     setSearchResults(filteredArray);
-  //     setDisplayChats(filteredArray);
-  //     console.log("filteredArray",filteredArray);
-  //   },500);
-  //   return () => {
-  //     console.log("ret: ",displayChats)
-  //     // setLoading(true);
-  //     clearTimeout(id)
-  //   };
-  //   // setLoading(false);
-  //   console.log("searchedTerm ",searchedTerm)
-  // },[searchedTerm])
   return (
     <>
       {/* <label for="search">Search Contacts</label> 
